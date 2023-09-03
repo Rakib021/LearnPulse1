@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+{%block content%}
+{%if user.is_authenticated%}
+
+<div style="width: 80%; margin:auto;">
+<h1>Show Courses</h1>
+<div>
+  {%if data%}
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Department</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {%for i in data%}
+            <tr>
+                <th scope="row">{{i.id}}</th>
+
+                <td>{{i.title}}</td>
+                <td>{{i.author}}</td>
+                <td>{{i.department}}</td>
+                <td>{{i.price}}</td>
+                <td><a href="{%url 'editcourse' i.id%}"><button class="btn btn-warning">Edit</button></a> <a href="{%url 'deletecourse' i.id%}"><button class="btn btn-danger">Delete</button></a></td>
+
+                
+              </tr>
+
+            {%endfor%}
+          
+          
+        </tbody>
+      </table>
+
+      <a href="{%url 'home'%}"><button  class="btn btn-primary">Back To Home</button></a>
+      <br>
+      <br>
+      {%else%}
+      <h1 class="text-danger">No Courses available</h1>
+      {%endif%}
+</div>
+</div>
+{%else%}
+    <h1 class="mx-auto">Please Login</h1>
+{%endif%}
+{%endblock%}
